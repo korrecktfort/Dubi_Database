@@ -1,0 +1,18 @@
+{
+    "name": "Dubi.Database.New.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:193ae23ccefed5647a6bc1c3212dd6a8"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

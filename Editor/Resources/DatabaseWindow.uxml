@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Editor%20Systems/Database/Resources/DatabaseUSS.uss?fileID=7433441132597879392&amp;guid=1cfa80b306f36b34b823f17462f15fda&amp;type=3#DatabaseUSS" />
+    <ui:VisualElement name="Entries" style="flex-direction: row;">
+        <ui:VisualElement name="Entries__Left" class="leftColumn" style="background-color: rgb(63, 63, 63);" />
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" name="Entries__Right" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>

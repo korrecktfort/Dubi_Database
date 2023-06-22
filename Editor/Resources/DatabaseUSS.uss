@@ -1,0 +1,140 @@
+.leftColumn{
+	width: 300px;
+}
+
+.listView{
+	border-width: 1px;
+    border-radius: 2px;
+    border-color: rgb(26, 26, 26);
+}
+
+.listViewElement--addScrollerWidth {
+	flex-grow: 1;
+}
+
+.listViewElement {
+	flex-grow: 1;
+	margin: 2px;
+}
+
+.listViewElement__contentContainer{
+	max-height: 19px;
+	flex-direction: row;
+	flex-grow: 1;
+	justify-content: space-between;
+	margin: 1px;
+}
+
+.listViewElement__contentContainer__textRow{
+	flex-direction: row;
+	flex-grow: 1;	
+	overflow: hidden;
+	white-space: nowrap;
+	flex-wrap: nowrap;
+	margin-top: 1px;	
+}
+
+.listViewElement__contentContainer__textRow__id {
+	width: 20px;
+	-unity-font-style: bold;
+	color: #FFA249;
+}
+
+.listViewElement__contentContainer__textRow__text {
+border-bottom-width: 1px;
+border-bottom-color: rgba(255 255 255, .1);
+}
+
+.listViewElement__contentContainer__textRow__text:hover {
+	cursor: text
+}
+
+.listViewElement__contentContainer__buttonRow{
+	flex-direction: row;
+	margin-top: 2px;
+}
+
+.listViewElement__contentContainer__buttonRow__button{
+	width: 15px;
+	height: 15px;
+}
+
+.listViewElement__contentContainer--unrelated
+{
+	padding-right: 4px;
+}
+
+.listViewElement__contentContainer--sourceEntry {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	border-color: rgba(0, 0, 0, 0.82);
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;	
+	padding-right: 3px;
+}
+
+.listViewElement__contentContainer--related {
+	border-color: rgba(0, 0, 0, 0.82);
+	border-left-width: 1px;
+	border-right-width: 1px;
+	padding-right: 3px;
+}
+
+.listViewElement__contentContainer--relatedLast {
+	border-color: rgba(0, 0, 0, 0.82);
+	border-bottom-width: 1px;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;	
+}
+
+/*override boder colors*/
+.listViewElement__contentContainer--sub-related {
+	border-color: rgba(0, 0, 0, 0.82);
+	margin-left: 2px;
+	padding-right: 1px;
+}
+
+.listViewElement__renameElement{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+
+.listViewElement__renameElement__renameField{
+	flex-grow: 1;
+}
+
+.listViewElement__renameElement__renameButton{
+	min-width: 35px;	
+	font-size: 11px;
+}
+
+.listViewElement__renameElement__buttonSpacer{
+	min-width: 3px;
+}
+
+.lock {
+	cursor: link;
+    min-width: 19px;
+    min-height: 19px;
+    width: 19px;
+    height: 19px;
+}
+
+.lock-out {
+    background-image: resource('Builtin Skins/DarkSkin/Images/IN LockButton.png');
+}
+
+.lock-in {
+    background-image: resource('Builtin Skins/DarkSkin/Images/IN LockButton on.png');
+}
+
+.lock:hover {
+	background-color: rgba(192,192,192,0.3);
+	border-radius: 15px;
+}
+
+.unity-collection-view__item--selected {
+	background-color: #527D60;
+}
