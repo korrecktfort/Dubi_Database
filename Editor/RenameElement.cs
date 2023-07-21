@@ -33,7 +33,7 @@ namespace Dubi.Database.Editor
         }
 
         public void Bind(Entry entry, Action OnClose)
-        {
+        {     
             this.OnClose = OnClose;
             SerializedObject serializedEntry = new SerializedObject(entry);
             SerializedProperty displayName = serializedEntry.FindProperty("displayName");
@@ -46,7 +46,7 @@ namespace Dubi.Database.Editor
                 string value = this.textField.value;
 
                 displayName.stringValue = value;
-                serializedEntry.ApplyModifiedProperties();
+                displayName.serializedObject.ApplyModifiedProperties();
 
                 AssetDatabase.RenameAsset(AssetDatabase.GetAssetPath(entry), value);
 
@@ -57,7 +57,7 @@ namespace Dubi.Database.Editor
             {
                 if (e.button == 0)
                 {
-                    this.textField.SelectAll();
+                    this.textField.Focus();
 
                     if (e.target == this.textField)
                         e.StopImmediatePropagation();
@@ -78,13 +78,13 @@ namespace Dubi.Database.Editor
             });
 
             this.cancel.clickable = new Clickable(() =>
-            {
+            {                
                 this.OnClose?.Invoke();
             });
         }
 
         public void OverrideOnClose()
-        {
+        {            
             this.OnClose?.Invoke();
         }
     }

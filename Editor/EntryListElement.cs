@@ -57,6 +57,14 @@ namespace Dubi.Database.Editor
             Add(this.container);
         }
 
+        private void KeyDown(KeyDownEvent evt)
+        {
+            if(evt.keyCode == KeyCode.F2)
+            {
+                InitRenaming(evt);                
+            }
+        }
+
         public void Bind(Entry entry)
         {
             this.entry = entry;
@@ -145,21 +153,30 @@ namespace Dubi.Database.Editor
             {
                 if (e.button == 0)
                 {
-                    this.renameElement.Bind(entry, () =>
-                    {
-                        this.renameElement.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-                        this.displayName.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-                        this.buttonRow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-                    });
-
-                    this.renameElement.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
-                    this.displayName.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-                    this.buttonRow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
-
+                    InitRenaming(e);
                     e.StopImmediatePropagation();
                     Event.current.Use();
                 }
             });
+        }
+
+        void InitRenaming(EventBase e)
+        {
+            void OnClose()
+            {
+                this.renameElement.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+                this.displayName.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+                this.buttonRow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            }
+
+            this.renameElement.Bind(entry, OnClose);
+
+            this.renameElement.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.Flex);
+            this.displayName.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+            this.buttonRow.style.display = new StyleEnum<DisplayStyle>(DisplayStyle.None);
+
+            e.StopImmediatePropagation();
+            Event.current.Use();
         }
 
         void SetButtonVisibleState(Entry entry, int depth)
