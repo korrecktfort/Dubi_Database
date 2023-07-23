@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,19 +58,28 @@ namespace Dubi.Database
 
                 List<string> propertyNames = new List<string>();
 
-                foreach(FieldInfo fieldInfo in entry.GetType().GetFields(this.flags))
+                Type type = entry.GetType();
+
+                do
                 {
-                    if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
-                        continue;
+                    foreach(FieldInfo fieldInfo in type.GetFields(this.flags))
+                    {
+                        if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
+                            continue;
 
-                    if(fieldInfo.GetCustomAttribute<HideInInspector>() != null)
-                        continue;
+                        if(fieldInfo.GetCustomAttribute<HideInInspector>() != null)
+                            continue;
 
-                    if (fieldInfo.IsPrivate && fieldInfo.GetCustomAttribute<SerializeField>() == null)
-                        continue;
+                        if (fieldInfo.IsPrivate && fieldInfo.GetCustomAttribute<SerializeField>() == null)
+                            continue;
 
-                    propertyNames.Add(fieldInfo.Name);
-                }
+                        propertyNames.Add(fieldInfo.Name);
+                    }
+
+                    type = type.BaseType;
+
+                }while(type != typeof(Entry));
+
 
                 SerializedObject serializedEntry = new SerializedObject(property.objectReferenceValue);               
                 float lastPropHeight = position.height;
@@ -103,30 +113,40 @@ namespace Dubi.Database
 
             Entry entry = property.objectReferenceValue as Entry;
 
-            if (entry != null && property.isExpanded)
+            if (entry == null)
+                return height;
+
+            Type type = entry.GetType();
+
+            do
             {
-                List<string> propertyNames = new List<string>();
-                foreach (FieldInfo fieldInfo in entry.GetType().GetFields(this.flags))
+                if (property.isExpanded)
                 {
-                    if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
-                        continue;
+                    List<string> propertyNames = new List<string>();
+                    foreach (FieldInfo fieldInfo in type.GetFields(this.flags))
+                    {
+                        if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
+                            continue;
 
-                    if (fieldInfo.GetCustomAttribute<HideInInspector>() != null)
-                        continue;
+                        if (fieldInfo.GetCustomAttribute<HideInInspector>() != null)
+                            continue;
 
-                    if (fieldInfo.IsPrivate && fieldInfo.GetCustomAttribute<SerializeField>() == null)
-                        continue;
+                        if (fieldInfo.IsPrivate && fieldInfo.GetCustomAttribute<SerializeField>() == null)
+                            continue;
 
-                    propertyNames.Add(fieldInfo.Name);
+                        propertyNames.Add(fieldInfo.Name);
+                    }
+
+                    SerializedObject serializedEntry = new SerializedObject(property.objectReferenceValue);
+
+                    foreach (string propertyName in propertyNames.ToArray())
+                    {
+                        height += EditorGUI.GetPropertyHeight(serializedEntry.FindProperty(propertyName)) + EditorGUIUtility.standardVerticalSpacing;
+                    }
                 }
 
-                SerializedObject serializedEntry = new SerializedObject(property.objectReferenceValue);
-
-                foreach (string propertyName in propertyNames.ToArray())
-                {
-                    height += EditorGUI.GetPropertyHeight(serializedEntry.FindProperty(propertyName)) + EditorGUIUtility.standardVerticalSpacing;
-                }
-            }
+                type = type.BaseType;
+            } while (type != typeof(Entry));
 
             return height;
         }

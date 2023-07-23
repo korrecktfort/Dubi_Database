@@ -135,13 +135,12 @@ namespace Dubi.Database.Editor
                 element.Bind(entries[i]);
             };
 
-            listView.onSelectionChange += (s) =>
+            listView.selectionChanged += (s) =>
             {
                 rightColumn.Unbind();
                 rightColumn.Clear();
-
-                UQueryBuilder<RenameElement> qb = listView.Query<RenameElement>();
-                qb.ForEach(e =>
+                                
+                listView.Query<RenameElement>().ForEach(e =>
                 {
                     e.OverrideOnClose();
                 });

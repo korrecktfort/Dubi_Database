@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dubi.Database
-{
-    [System.Serializable]
+{  
     public class Entry : ScriptableObject
     {
         [Hide, HideInInspector] public int id = 0;

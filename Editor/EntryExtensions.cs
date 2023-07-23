@@ -287,13 +287,20 @@ namespace Dubi.Database.Editor
         {
             List<string> list = new List<string>();
 
-            foreach (FieldInfo fieldInfo in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public))
+            do
             {
-                if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
-                    continue;
+                foreach (FieldInfo fieldInfo in type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public))
+                {
+                    if (fieldInfo.GetCustomAttribute<HideAttribute>() != null)
+                        continue;
 
-                list.Add(fieldInfo.Name);
-            }
+                    if(!list.Contains(fieldInfo.Name))
+                        list.Add(fieldInfo.Name);
+                }
+
+                type = type.BaseType;
+
+            } while (type != typeof(Entry));
 
             return list;
         }
