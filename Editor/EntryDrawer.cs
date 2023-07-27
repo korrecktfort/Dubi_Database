@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Dubi.Database
 {
-    [CustomPropertyDrawer(typeof(Entry), true)]
+    // [CustomPropertyDrawer(typeof(Entry), true)]
     public class EntryDrawer : PropertyDrawer
     {        
         BindingFlags flags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic;
